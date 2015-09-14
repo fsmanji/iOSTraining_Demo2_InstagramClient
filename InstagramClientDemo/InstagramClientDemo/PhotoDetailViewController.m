@@ -7,9 +7,14 @@
 //
 
 #import "PhotoDetailViewController.h"
+#import "UIImageView+AFNetworking.h"
+
 
 @interface PhotoDetailViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *commentsTableView;
+@property (weak, nonatomic) IBOutlet UIImageView *highResImageView;
+
+- (IBAction)onTapOnPhoto:(id)sender;
 
 @end
 
@@ -18,6 +23,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //Don't forget to set the userInteractionEnabled to YES, by default It's NO.
+    self.highResImageView.userInteractionEnabled = YES;
+    
+    //the following is how to programmically add gesture support.
+    
+    /*
+     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc]
+                                             initWithTarget:self action:@selector(onTapOnPhoto:)];
+    [tapRecognizer setNumberOfTouchesRequired:2];
+    [tapRecognizer setDelegate:self];
+    //Don't forget to set the userInteractionEnabled to YES, by default It's NO.
+    self.highResImageView.userInteractionEnabled = YES;
+    [self.highResImageView addGestureRecognizer:tapRecognizer];
+     */
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,10 +75,26 @@
 
 -(void)setPhotoInfo:(NSDictionary *)photo {
     self.myPhoto = photo;
+    
+    //load comments list
     [self.commentsTableView reloadData];
+
+    //load the photo
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        NSDictionary* images = self.myPhoto[@"images"];
+        NSDictionary* highres = images[@"standard_resolution"];
+        NSString* urlstring = highres[@"url"];
+        NSURL* url = [NSURL URLWithString:urlstring];
+        [self.highResImageView setImageWithURL:url];
+
+    });
 }
 
 
+- (IBAction)onTapOnPhoto:(id)sender{
+    NSLog(@"---- tapped on photo --- ");
+}
 
 /*
 #pragma mark - Navigation

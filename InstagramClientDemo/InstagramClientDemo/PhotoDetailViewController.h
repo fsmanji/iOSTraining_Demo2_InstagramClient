@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PhotoDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface PhotoDetailViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIGestureRecognizerDelegate>
 
 @property NSDictionary* myPhoto;
 

@@ -18,6 +18,7 @@
 		B397F5791BA75F1900B13D99 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = B397F5781BA75F1900B13D99 /* Constants.m */; };
 		B397F57C1BA7625800B13D99 /* MyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B397F57B1BA7625800B13D99 /* MyTableViewCell.m */; };
 		B397F57F1BA7685000B13D99 /* PhotoDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B397F57E1BA7685000B13D99 /* PhotoDetailViewController.m */; };
+		B3FEFB7D1BA784D100973E70 /* LightboxViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B3FEFB7C1BA784D100973E70 /* LightboxViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		B397F57B1BA7625800B13D99 /* MyTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTableViewCell.m; sourceTree = "<group>"; };
 		B397F57D1BA7685000B13D99 /* PhotoDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoDetailViewController.h; sourceTree = "<group>"; };
 		B397F57E1BA7685000B13D99 /* PhotoDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoDetailViewController.m; sourceTree = "<group>"; };
+		B3FEFB7B1BA784D100973E70 /* LightboxViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LightboxViewController.h; sourceTree = "<group>"; };
+		B3FEFB7C1BA784D100973E70 /* LightboxViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LightboxViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +131,8 @@
 				B397F57B1BA7625800B13D99 /* MyTableViewCell.m */,
 				B397F57D1BA7685000B13D99 /* PhotoDetailViewController.h */,
 				B397F57E1BA7685000B13D99 /* PhotoDetailViewController.m */,
+				B3FEFB7B1BA784D100973E70 /* LightboxViewController.h */,
+				B3FEFB7C1BA784D100973E70 /* LightboxViewController.m */,
 			);
 			path = InstagramClientDemo;
 			sourceTree = "<group>";
@@ -294,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B397F5741BA75DE900B13D99 /* PhotoViewController.m in Sources */,
+				B3FEFB7D1BA784D100973E70 /* LightboxViewController.m in Sources */,
 				B35B64AE1BA75A06008B6127 /* AppDelegate.m in Sources */,
 				B35B64AB1BA75A06008B6127 /* main.m in Sources */,
 				B397F5791BA75F1900B13D99 /* Constants.m in Sources */,
