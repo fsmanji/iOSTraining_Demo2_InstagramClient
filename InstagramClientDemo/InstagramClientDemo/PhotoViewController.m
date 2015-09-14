@@ -13,24 +13,28 @@
 #import "PhotoDetailViewController.h"
 
 @interface PhotoViewController ()
-
+//views
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+//data
 @property NSDictionary *responseDictionary;
 
 @end
 
 @implementation PhotoViewController
 
-@synthesize tableView;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
-    [self connectToServer];
+    [self sendRequest];
     
-    [tableView setRowHeight:320];
+    [self.tableView setRowHeight:320];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(onPullToRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -39,12 +43,12 @@
 }
 
 
--(void) connectToServer{
+-(void) sendRequest{
     NSURL *url = [NSURL URLWithString:kInstagramURL];
     NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
     [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) {
         self.responseDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-        
+        [self.refreshControl endRefreshing];
         [self onDataLoaded];
         NSLog(@"response: %@", self.responseDictionary);
     }];
@@ -74,11 +78,15 @@
     NSLog(@"tapped row : %li", indexPath.row);
     
     //remove the highlight.
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 -(void)onDataLoaded {
     [self.tableView reloadData];
+}
+
+-(void)onPullToRefresh {
+    [self sendRequest];
 }
 
 
@@ -103,7 +111,7 @@
     // Pass the selected object to the new view controller.
     
     PhotoDetailViewController *photoDetailViewController = [segue destinationViewController];
-    NSIndexPath *indexPath = [tableView indexPathForCell:sender];
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
     NSInteger row = indexPath.row;
     [photoDetailViewController setPhotoInfo:self.responseDictionary[@"data"][row]];
 }
