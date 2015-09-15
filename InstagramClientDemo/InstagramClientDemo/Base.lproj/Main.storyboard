@@ -91,7 +91,7 @@
                 <tapGestureRecognizer id="32L-IS-ir4">
                     <connections>
                         <action selector="onTapOnPhoto:" destination="nnD-9g-qdj" id="S0V-P5-y5m"/>
-                        <segue destination="AdP-WI-pl0" kind="modal" id="QvZ-kc-o0c"/>
+                        <segue destination="AdP-WI-pl0" kind="modal" id="bKT-qc-MHf"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -115,7 +115,7 @@
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ZEF-eR-7bO">
                                         <rect key="frame" x="140" y="511" width="40" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
                                         <state key="normal" title="Close">
                                             <color key="titleColor" red="1" green="0.1332475689" blue="0.15272926959999999" alpha="1" colorSpace="calibratedRGB"/>

@@ -11,6 +11,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "MyTableViewCell.h"
 #import "PhotoDetailViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface PhotoViewController ()
 //views
@@ -68,10 +69,13 @@
 
 //Table view datasource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.responseDictionary[@"data"] count];
+    return 1;
 }
 
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return [self.responseDictionary[@"data"] count];
+}
 
 - (UITableViewCell* )tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
@@ -80,7 +84,7 @@
     MyTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"com.yahoo.tablecell" forIndexPath:indexPath];
     
     NSInteger row = indexPath.row;
-    [self showPhotoForCell:cell onRow:row];
+    [self showPhotoForCell:cell onRow:row onSection:indexPath.section];
 
     return cell;
 }
@@ -94,6 +98,37 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
+    [headerView setBackgroundColor:[UIColor colorWithWhite:1.0 alpha:0.9]];
+    
+    UIImageView *profileView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
+    [profileView setClipsToBounds:YES];
+    profileView.layer.cornerRadius = 15;
+    profileView.layer.borderColor = [UIColor colorWithWhite:0.7 alpha:0.8].CGColor;
+    profileView.layer.borderWidth = 1;
+    
+    // Use the section number to get the right URL
+    
+    NSDictionary* photo = self.responseDictionary[@"data"][section];
+    
+    NSDictionary* user = photo[@"user"];
+    NSString* profile_url = user[@"profile_picture"];
+    NSString* username = user[@"username"];
+    
+    [profileView setImageWithURL:[NSURL URLWithString:profile_url]];
+    
+    [headerView addSubview:profileView];
+    
+    // Add a UILabel for the username here
+    
+    return headerView;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 100;
+}
+
 -(void)onDataLoaded {
     [self.tableView reloadData];
 }
@@ -104,9 +139,9 @@
 
 
 //extract the photo url and set it to the UIImageView
-- (void) showPhotoForCell:(MyTableViewCell*)cell onRow:(NSInteger)row {
+- (void) showPhotoForCell:(MyTableViewCell*)cell onRow:(NSInteger)row onSection:(NSInteger)section{
     
-    NSDictionary* photo = self.responseDictionary[@"data"][row];
+    NSDictionary* photo = self.responseDictionary[@"data"][section];
     
     NSDictionary* images = photo[@"images"];
     NSDictionary* lowres = images[@"low_resolution"];

@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+
 @interface LightboxViewController : UIViewController <UIScrollViewDelegate>
+
+- (void)setImageUrl:(NSURL *)url;
 
 @end

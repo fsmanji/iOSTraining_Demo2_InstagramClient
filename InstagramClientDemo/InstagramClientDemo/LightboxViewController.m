@@ -7,11 +7,15 @@
 //
 
 #import "LightboxViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface LightboxViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @property (weak, nonatomic) IBOutlet UIImageView *fullscreenImageView;
+
+
+@property NSURL* photoURL;
 
 @end
 
@@ -21,6 +25,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.scrollView.contentSize = _fullscreenImageView.image.size;
+    _scrollView.delegate = self;
+    
+    if(self.photoURL) {
+        [self.fullscreenImageView setImageWithURL:self.photoURL];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,6 +43,16 @@
 
 - (IBAction)onCloseClicked:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)setImageUrl:(NSURL *)url {
+    
+    self.photoURL = url;
+    
+    if ([self isViewLoaded]) {
+        [self.fullscreenImageView setImageWithURL:url];
+    }
+    
 }
 
 /*
