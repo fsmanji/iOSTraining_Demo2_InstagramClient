@@ -168,8 +168,8 @@
     
     PhotoDetailViewController *photoDetailViewController = [segue destinationViewController];
     NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
-    NSInteger row = indexPath.row;
-    [photoDetailViewController setPhotoInfo:self.responseDictionary[@"data"][row]];
+    NSInteger section = indexPath.section;
+    [photoDetailViewController setPhotoInfo:self.responseDictionary[@"data"][section]];
 }
 
 

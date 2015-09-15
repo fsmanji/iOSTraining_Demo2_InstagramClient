@@ -27,6 +27,9 @@
     
     //Don't forget to set the userInteractionEnabled to YES, by default It's NO.
     self.highResImageView.userInteractionEnabled = YES;
+    if(_myPhoto) {
+        [self updateViews];
+    }
     
     //the following is how to programmically add gesture support.
     
@@ -77,18 +80,22 @@
 -(void)setPhotoInfo:(NSDictionary *)photo {
     self.myPhoto = photo;
     
-    //load comments list
-    [self.commentsTableView reloadData];
+    if([self isViewLoaded]) {
+        [self updateViews];
+    }
+}
 
-    //load the photo
+-(void)updateViews {
     dispatch_async(dispatch_get_main_queue(), ^{
-        
+        //load comments list
+        [self.commentsTableView reloadData];
+        //load the photo
         NSDictionary* images = self.myPhoto[@"images"];
         NSDictionary* highres = images[@"standard_resolution"];
         NSString* urlstring = highres[@"url"];
         NSURL* url = [NSURL URLWithString:urlstring];
         [self.highResImageView setImageWithURL:url];
-
+        
     });
 }
 
