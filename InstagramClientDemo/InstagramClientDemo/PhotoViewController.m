@@ -78,9 +78,7 @@
 }
 
 - (UITableViewCell* )tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@""];
-    //cell.textLabel.text = [NSString stringWithFormat:@"Row: %li", (long)indexPath.row];
-    //return cell;
+
     MyTableViewCell* cell = [self.tableView dequeueReusableCellWithIdentifier:@"com.yahoo.tablecell" forIndexPath:indexPath];
     
     NSInteger row = indexPath.row;
@@ -99,6 +97,7 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 50)];
     [headerView setBackgroundColor:[UIColor colorWithWhite:1.0 alpha:0.9]];
     
@@ -121,6 +120,15 @@
     [headerView addSubview:profileView];
     
     // Add a UILabel for the username here
+    UILabel* nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 10, 100, 30)];
+    [headerView addSubview:nameLabel];
+    nameLabel.text = username;
+    
+    // Add a UILabel for the caption here
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 40, 320, 30)];
+    [headerView addSubview:titleLabel];
+    titleLabel.text = photo[@"caption"][@"text"];
+    
     
     return headerView;
 }
